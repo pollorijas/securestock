@@ -27,9 +27,7 @@ const proveedorSchema = new mongoose.Schema({
   },
   contacto: {
     type: String
-  },
-  resetToken: String,
-  expiraToken: Date
+  }
 }, {
   timestamps: true // Agrega automáticamente createdAt y updatedAt
 });

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SecureStock - Panel</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="barra-nav" id="barra-nav"></header>
+
+  <main class="contenedor">
+    <h1>Panel general</h1>
+    <p id="mensaje" class="mensaje oculto"></p>
+
+    <div class="kpis">
+      <div class="kpi">
+        <div class="valor" id="kpi-movimientos-hoy">-</div>
+        <div>Movimientos hoy</div>
+      </div>
+      <div class="kpi">
+        <div class="valor" id="kpi-stock-critico">-</div>
+        <div>Productos con stock crítico</div>
+      </div>
+    </div>
+
+    <div class="tarjeta">
+      <h2>Movimientos por día (últimos 7 días)</h2>
+      <div class="grafico-barras" id="grafico-movimientos"></div>
+    </div>
+
+    <div class="tarjeta">
+      <h2>Top 5 productos con más movimientos (últimos 30 días)</h2>
+      <div class="grafico-barras" id="grafico-top-productos"></div>
+    </div>
+
+    <div class="tarjeta">
+      <h2>Alerta de stock bajo</h2>
+      <div class="tabla-envoltorio">
+        <table>
+          <thead>
+            <tr><th>Producto</th><th>Stock actual</th><th>Stock mínimo</th><th>Unidad</th></tr>
+          </thead>
+          <tbody id="tabla-stock-critico"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

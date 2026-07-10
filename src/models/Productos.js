@@ -11,7 +11,7 @@ const productoSchema = new mongoose.Schema({
     required: [true, 'El stock es obligatorio'],
     default: 0
   },
-  stockActual: {
+  stockMinimo: {
     type: Number,
     required: [true, 'El stock minimo es obligatorio']
   },
@@ -24,11 +24,9 @@ const productoSchema = new mongoose.Schema({
     default: 'sin-categoria'
   },
   proveedorId: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'Proveedor'
-  },
-  resetToken: String,
-  expiraToken: Date
+  }
 }, {
   timestamps: true // Agrega automáticamente createdAt y updatedAt
 });

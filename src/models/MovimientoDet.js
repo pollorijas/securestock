@@ -2,13 +2,13 @@ const mongoose = require("mongoose");
 
 const movimientoDetSchema = new mongoose.Schema({
   movimientoId: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'Movimiento',
     required: true,
     index: true
   },
   productoId: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'Producto',
     required: true
   },
