@@ -44,7 +44,7 @@ router.post('/ingreso',
         const producto = await Producto.findByIdAndUpdate(
           item.productoId,
           { $inc: { stockActual: item.cantidad } },
-          { new: true }
+          { returnDocument: 'after' }
         );
         if (!producto) {
           return res.status(400).json({ mensaje: `Producto ${item.productoId} no existe` });

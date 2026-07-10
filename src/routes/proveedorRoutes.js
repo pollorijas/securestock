@@ -56,7 +56,7 @@ router.put('/:id', verificarToken, verificarRol(['administrador']), async (req, 
     const proveedor = await Proveedor.findByIdAndUpdate(
       req.params.id,
       { nombre, rut, direccion, telefono, email, contacto },
-      { new: true, runValidators: true }
+      { returnDocument: 'after', runValidators: true }
     );
 
     if (!proveedor) {

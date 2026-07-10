@@ -26,11 +26,10 @@ const movimientoDetSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 // Calcula subtotal automáticamente si ambos valores existen
-movimientoDetSchema.pre('save', function(next) {
+movimientoDetSchema.pre('save', function() {
   if (this.precioUnitario && this.cantidad) {
     this.subtotal = this.cantidad * this.precioUnitario;
   }
-  next();
 });
 
 module.exports = mongoose.model('MovimientoDet', movimientoDetSchema);
