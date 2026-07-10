@@ -130,7 +130,7 @@ async function crearProveedores() {
     const proveedor = await Proveedor.findOneAndUpdate(
       { nombre: datos.nombre },
       { $setOnInsert: datos },
-      { upsert: true, new: true }
+      { upsert: true, returnDocument: 'after' }
     );
     documentos.push(proveedor);
   }
@@ -153,7 +153,7 @@ async function crearProductos(proveedores) {
     const producto = await Producto.findOneAndUpdate(
       { nombre: datos.nombre },
       { $setOnInsert: { ...datos, proveedorId: proveedor._id, stockActual: 0 } },
-      { upsert: true, new: true }
+      { upsert: true, returnDocument: 'after' }
     );
     documentos.push(producto);
   }

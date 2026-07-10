@@ -89,7 +89,7 @@ router.put('/:id',
       const producto = await Producto.findByIdAndUpdate(
         req.params.id,
         { nombre, stockMinimo, unidad, categoria, proveedorId },
-        { new: true, runValidators: true }
+        { returnDocument: 'after', runValidators: true }
       );
 
       if (!producto) {
