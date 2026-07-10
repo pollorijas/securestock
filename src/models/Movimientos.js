@@ -1,22 +1,27 @@
 const mongoose = require('mongoose');
 
-const productoSchema = new mongoose.Schema({
+const movimientoSchema = new mongoose.Schema({
   tipo: {
     type: String,
-    enum: ['ingreso','salida'],
-    required: [true, 'El tipo de ingreso es obligatorio']
+    enum: ['ingreso', 'salida'],
+    required: [true, 'El tipo de movimiento es obligatorio']
+  },
+  proveedorId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Proveedor'
   },
   destino: {
     type: String
   },
-  fechahora: {
+  fechaHora: {
     type: Date,
-    required: [true, 'La fecha y la hora es obligatoria es obligatorio'],
+    required: true,
     default: Date.now
   },
-  categoria: {
-    type: String,
-    default: 'sin-categoria'
+  usuarioId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Usuario',
+    required: true
   },
   observaciones: {
     type: String
@@ -26,24 +31,7 @@ const productoSchema = new mongoose.Schema({
   },
   factura: {
     type: String
-  },
-  proveedorId: {
-    type: Schema.Types.ObjectId,
-    ref: 'Proveedor'
-  },
-  productoId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Producto',
-    required: true,
-    index: true
-  },
-  usuarioId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Usuario',
-    required: true
-  },
-  resetToken: String,
-  expiraToken: Date
+  }
 }, {
   timestamps: true // Agrega automáticamente createdAt y updatedAt
 });

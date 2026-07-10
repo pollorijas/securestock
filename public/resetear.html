@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SecureStock - Restablecer contraseña</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="pantalla-auth">
+    <div class="tarjeta">
+      <h1>Nueva contraseña</h1>
+      <p id="mensaje" class="mensaje oculto"></p>
+      <form id="form-resetear">
+        <div>
+          <label for="password">Nueva contraseña</label>
+          <input type="password" id="password" required minlength="6" autocomplete="new-password">
+        </div>
+        <button type="submit" class="boton">Guardar nueva contraseña</button>
+      </form>
+      <p class="enlaces-auth">
+        <a href="index.html">Volver a iniciar sesión</a>
+      </p>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/resetear.js"></script>
+</body>
+</html>

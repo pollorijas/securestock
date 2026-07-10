@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SecureStock - Proveedores</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="barra-nav" id="barra-nav"></header>
+
+  <main class="contenedor">
+    <h1>Proveedores</h1>
+    <p id="mensaje" class="mensaje oculto"></p>
+
+    <div class="tarjeta">
+      <h2 id="titulo-form">Nuevo proveedor</h2>
+      <form id="form-proveedor">
+        <input type="hidden" id="proveedor-id">
+        <div class="fila-formulario">
+          <div>
+            <label for="nombre">Razón social</label>
+            <input type="text" id="nombre" required>
+          </div>
+          <div>
+            <label for="rut">RUT</label>
+            <input type="text" id="rut" required>
+          </div>
+          <div>
+            <label for="telefono">Teléfono</label>
+            <input type="text" id="telefono" required>
+          </div>
+        </div>
+        <div class="fila-formulario">
+          <div>
+            <label for="direccion">Dirección</label>
+            <input type="text" id="direccion" required>
+          </div>
+          <div>
+            <label for="email">Correo (opcional)</label>
+            <input type="email" id="email">
+          </div>
+          <div>
+            <label for="contacto">Persona de contacto (opcional)</label>
+            <input type="text" id="contacto">
+          </div>
+        </div>
+        <div>
+          <button type="submit" class="boton">Guardar</button>
+          <button type="button" id="btn-cancelar-edicion" class="boton secundario oculto">Cancelar edición</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="tarjeta">
+      <h2>Listado de proveedores</h2>
+      <div class="tabla-envoltorio">
+        <table>
+          <thead>
+            <tr><th>Nombre</th><th>RUT</th><th>Teléfono</th><th>Dirección</th><th>Acciones</th></tr>
+          </thead>
+          <tbody id="tabla-proveedores"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/proveedores.js"></script>
+</body>
+</html>

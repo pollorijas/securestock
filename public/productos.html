@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SecureStock - Productos</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="barra-nav" id="barra-nav"></header>
+
+  <main class="contenedor">
+    <h1>Productos</h1>
+    <p id="mensaje" class="mensaje oculto"></p>
+
+    <div class="tarjeta oculto" id="tarjeta-form">
+      <h2 id="titulo-form">Nuevo producto</h2>
+      <form id="form-producto">
+        <input type="hidden" id="producto-id">
+        <div class="fila-formulario">
+          <div>
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" required>
+          </div>
+          <div>
+            <label for="unidad">Unidad de medida</label>
+            <input type="text" id="unidad" placeholder="Ej: unidades, kg, litros" required>
+          </div>
+          <div>
+            <label for="stockMinimo">Stock mínimo</label>
+            <input type="number" id="stockMinimo" min="0" required>
+          </div>
+          <div>
+            <label for="categoria">Categoría (opcional)</label>
+            <input type="text" id="categoria">
+          </div>
+        </div>
+        <div>
+          <button type="submit" class="boton">Guardar</button>
+          <button type="button" id="btn-cancelar-edicion" class="boton secundario oculto">Cancelar edición</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="tarjeta">
+      <h2>Inventario actual</h2>
+      <div class="tabla-envoltorio">
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th><th>Categoría</th><th>Stock actual</th><th>Stock mínimo</th><th>Unidad</th><th id="th-acciones" class="oculto">Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-productos"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/productos.js"></script>
+</body>
+</html>

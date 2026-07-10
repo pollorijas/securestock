@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SecureStock - Ingresos y Salidas</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="barra-nav" id="barra-nav"></header>
+
+  <main class="contenedor">
+    <h1>Registrar movimiento</h1>
+    <p id="mensaje-form" class="mensaje oculto"></p>
+
+    <div class="tarjeta">
+      <form id="form-movimiento">
+        <div class="fila-formulario">
+          <div>
+            <label for="tipo">Tipo de movimiento</label>
+            <select id="tipo" required>
+              <option value="ingreso">Ingreso</option>
+              <option value="salida">Salida</option>
+            </select>
+          </div>
+          <div id="campo-proveedor">
+            <label for="proveedorId">Proveedor</label>
+            <select id="proveedorId"></select>
+          </div>
+          <div id="campo-destino" class="oculto">
+            <label for="destino">Destino</label>
+            <input type="text" id="destino" placeholder="Ej: Tienda Norte">
+          </div>
+        </div>
+
+        <div class="fila-formulario">
+          <div id="campo-lote">
+            <label for="lote">Lote (opcional)</label>
+            <input type="text" id="lote">
+          </div>
+          <div id="campo-factura">
+            <label for="factura">N° Factura (opcional)</label>
+            <input type="text" id="factura">
+          </div>
+        </div>
+
+        <div>
+          <label for="observaciones">Observaciones</label>
+          <textarea id="observaciones" rows="2"></textarea>
+        </div>
+
+        <h3>Productos</h3>
+        <div id="lista-items"></div>
+        <button type="button" id="btn-agregar-item" class="boton secundario">+ Agregar producto</button>
+
+        <button type="submit" class="boton">Guardar movimiento</button>
+      </form>
+    </div>
+
+    <div class="tarjeta oculto" id="tarjeta-historial">
+      <h2>Historial de movimientos</h2>
+      <div class="filtros">
+        <div class="campo">
+          <label for="filtro-tipo">Tipo</label>
+          <select id="filtro-tipo">
+            <option value="">Todos</option>
+            <option value="ingreso">Ingreso</option>
+            <option value="salida">Salida</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label for="filtro-desde">Desde</label>
+          <input type="date" id="filtro-desde">
+        </div>
+        <div class="campo">
+          <label for="filtro-hasta">Hasta</label>
+          <input type="date" id="filtro-hasta">
+        </div>
+        <button type="button" id="btn-filtrar" class="boton secundario">Filtrar</button>
+        <button type="button" id="btn-exportar" class="boton secundario">Exportar CSV</button>
+      </div>
+
+      <p id="mensaje-historial" class="mensaje oculto"></p>
+      <div class="tabla-envoltorio">
+        <table>
+          <thead>
+            <tr><th>Fecha</th><th>Tipo</th><th>Usuario</th><th>Detalle</th></tr>
+          </thead>
+          <tbody id="tabla-historial"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <template id="plantilla-item">
+    <div class="fila-formulario item-movimiento">
+      <div>
+        <label>Producto</label>
+        <select class="item-producto" required></select>
+      </div>
+      <div>
+        <label>Cantidad</label>
+        <input type="number" class="item-cantidad" min="1" required>
+      </div>
+      <div>
+        <label>Precio unitario (opcional)</label>
+        <input type="number" class="item-precio" min="0" step="0.01">
+      </div>
+      <div>
+        <button type="button" class="boton peligro btn-quitar-item">Quitar</button>
+      </div>
+    </div>
+  </template>
+
+  <script src="js/api.js"></script>
+  <script src="js/movimientos.js"></script>
+</body>
+</html>
