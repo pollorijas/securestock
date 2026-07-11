@@ -32,6 +32,7 @@ app.use('/api/auth', require('./src/routes/authRoutes'));
 app.use('/api/productos', require('./src/routes/productoRoutes'));
 app.use('/api/proveedores', require('./src/routes/proveedorRoutes'));
 app.use('/api/movimientos', require('./src/routes/movimientoRoutes'));
+app.use('/api/logs', require('./src/routes/logRoutes'));
 
 // 6. Archivos estáticos del frontend (HTML, CSS y JS)
 app.use(express.static(path.join(__dirname, 'public')));

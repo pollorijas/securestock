@@ -58,6 +58,7 @@ Sistema web para el control de inventario, análisis de movimientos y seguridad 
 | GET    | /api/movimientos/inventario     | Stock actual de todos los productos            | Supervisor, Administrador       |
 | GET    | /api/movimientos/dashboard      | Indicadores para el panel principal            | Supervisor, Administrador       |
 | GET    | /api/movimientos/export         | Exporta el historial (CSV o JSON)              | Supervisor, Administrador       |
+| GET    | /api/logs                       | Consulta la auditoría del sistema              | Administrador                   |
 
 ## Seguridad implementada
 
