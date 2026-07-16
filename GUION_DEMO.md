@@ -21,8 +21,9 @@ Este guion recorre los tres perfiles y las reglas de negocio clave del sistema.
 
 **1. Login y seguridad (2 min) — como Operario**
 - Iniciar sesión con credenciales incorrectas → mensaje de error (sin revelar detalles).
-- Iniciar sesión como operario → observar que la barra de navegación solo muestra
-  Panel e Ingresos/Salidas (control de acceso por rol, RF: perfiles diferenciados).
+- Iniciar sesión como operario → observar que la barra de navegación muestra
+  Panel, Ingresos/Salidas y Productos (solo consulta), pero no Proveedores ni
+  Usuarios (control de acceso por rol, RF: perfiles diferenciados).
 
 **2. Registro de movimientos (3 min) — como Operario**
 - Registrar un ingreso: elegir proveedor, agregar 2 productos con cantidades, guardar.

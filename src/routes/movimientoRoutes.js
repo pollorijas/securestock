@@ -140,8 +140,9 @@ router.post('/salida',
   }
 );
 
-// GET /api/movimientos/inventario - stock actual de todos los productos (supervisor y administrador)
-router.get('/inventario', verificarToken, verificarRol(['supervisor', 'administrador']), async (req, res) => {
+// GET /api/movimientos/inventario - stock actual de todos los productos
+// (todos los roles: es la misma información que entrega GET /api/productos)
+router.get('/inventario', verificarToken, verificarRol(['operario', 'supervisor', 'administrador']), async (req, res) => {
   try {
     const productos = await Producto.find().sort({ nombre: 1 });
     const inventario = productos.map((p) => ({

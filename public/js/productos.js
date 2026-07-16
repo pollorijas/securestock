@@ -1,35 +1,39 @@
 // public/js/productos.js
 document.addEventListener('DOMContentLoaded', async () => {
-  const usuario = requerirSesion(['supervisor', 'administrador']);
+  const usuario = requerirSesion(['operario', 'supervisor', 'administrador']);
   if (!usuario) return;
 
   pintarBarraNav('productos.html');
 
-  const esAdmin = usuario.rol === 'administrador';
-  if (esAdmin) {
+  // El operario solo consulta; supervisor y administrador pueden crear y editar;
+  // eliminar queda reservado al administrador.
+  const puedeGestionar = usuario.rol === 'supervisor' || usuario.rol === 'administrador';
+  const puedeEliminar = usuario.rol === 'administrador';
+
+  if (puedeGestionar) {
     document.getElementById('tarjeta-form').classList.remove('oculto');
     document.getElementById('th-acciones').classList.remove('oculto');
     document.getElementById('form-producto').addEventListener('submit', guardarProducto);
     document.getElementById('btn-cancelar-edicion').addEventListener('click', cancelarEdicion);
   }
 
-  await cargarProductos(esAdmin);
+  await cargarProductos(puedeGestionar, puedeEliminar);
 });
 
-async function cargarProductos(esAdmin) {
+async function cargarProductos(puedeGestionar, puedeEliminar) {
   const mensaje = document.getElementById('mensaje');
   try {
     const productos = await apiFetch('/productos');
-    pintarTabla(productos, esAdmin);
+    pintarTabla(productos, puedeGestionar, puedeEliminar);
   } catch (error) {
     mostrarMensaje(mensaje, error.message, 'error');
   }
 }
 
-function pintarTabla(productos, esAdmin) {
+function pintarTabla(productos, puedeGestionar, puedeEliminar) {
   const cuerpo = document.getElementById('tabla-productos');
   if (productos.length === 0) {
-    cuerpo.innerHTML = `<tr><td colspan="${esAdmin ? 6 : 5}">Sin productos registrados</td></tr>`;
+    cuerpo.innerHTML = `<tr><td colspan="${puedeGestionar ? 6 : 5}">Sin productos registrados</td></tr>`;
     return;
   }
 
@@ -40,21 +44,21 @@ function pintarTabla(productos, esAdmin) {
       <td>${p.stockActual}</td>
       <td>${p.stockMinimo}</td>
       <td>${p.unidad}</td>
-      ${esAdmin ? `
+      ${puedeGestionar ? `
         <td>
           <button type="button" class="boton secundario btn-editar" data-id="${p._id}">Editar</button>
-          <button type="button" class="boton peligro btn-eliminar" data-id="${p._id}">Eliminar</button>
+          ${puedeEliminar ? `<button type="button" class="boton peligro btn-eliminar" data-id="${p._id}">Eliminar</button>` : ''}
         </td>
       ` : ''}
     </tr>
   `).join('');
 
-  if (esAdmin) {
+  if (puedeGestionar) {
     document.querySelectorAll('.btn-editar').forEach((boton) => {
       boton.addEventListener('click', () => cargarProductoEnFormulario(boton.dataset.id, productos));
     });
     document.querySelectorAll('.btn-eliminar').forEach((boton) => {
-      boton.addEventListener('click', () => eliminarProducto(boton.dataset.id));
+      boton.addEventListener('click', () => eliminarProducto(boton.dataset.id, puedeGestionar, puedeEliminar));
     });
   }
 }
@@ -85,6 +89,10 @@ async function guardarProducto(evento) {
   const mensaje = document.getElementById('mensaje');
   mensaje.classList.add('oculto');
 
+  const usuario = obtenerUsuario();
+  const puedeGestionar = usuario.rol === 'supervisor' || usuario.rol === 'administrador';
+  const puedeEliminar = usuario.rol === 'administrador';
+
   const id = document.getElementById('producto-id').value;
   const cuerpo = {
     nombre: document.getElementById('nombre').value.trim(),
@@ -102,20 +110,20 @@ async function guardarProducto(evento) {
       mostrarMensaje(mensaje, 'Producto creado correctamente', 'exito');
     }
     cancelarEdicion();
-    await cargarProductos(true);
+    await cargarProductos(puedeGestionar, puedeEliminar);
   } catch (error) {
     mostrarMensaje(mensaje, error.message, 'error');
   }
 }
 
-async function eliminarProducto(id) {
+async function eliminarProducto(id, puedeGestionar, puedeEliminar) {
   if (!confirm('¿Eliminar este producto? Esta acción no se puede deshacer.')) return;
   const mensaje = document.getElementById('mensaje');
 
   try {
     await apiFetch(`/productos/${id}`, { method: 'DELETE' });
     mostrarMensaje(mensaje, 'Producto eliminado correctamente', 'exito');
-    await cargarProductos(true);
+    await cargarProductos(puedeGestionar, puedeEliminar);
   } catch (error) {
     mostrarMensaje(mensaje, error.message, 'error');
   }

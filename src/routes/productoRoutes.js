@@ -6,8 +6,9 @@ const Producto = require('../models/Productos');
 const { verificarToken, verificarRol } = require('../middleware/auth');
 const { registrarLog } = require('../utils/logger');
 
-// GET /api/productos - listado de productos con stock (supervisor y administrador)
-router.get('/', verificarToken, verificarRol(['supervisor', 'administrador']), async (req, res) => {
+// GET /api/productos - listado de productos con stock (todos los roles:
+// el operario necesita consultar el catálogo y el stock para su trabajo diario)
+router.get('/', verificarToken, verificarRol(['operario', 'supervisor', 'administrador']), async (req, res) => {
   try {
     const productos = await Producto.find().sort({ nombre: 1 });
     res.json(productos);
@@ -29,8 +30,8 @@ router.get('/basico', verificarToken, async (req, res) => {
   }
 });
 
-// GET /api/productos/:id - un producto específico (supervisor y administrador)
-router.get('/:id', verificarToken, verificarRol(['supervisor', 'administrador']), async (req, res) => {
+// GET /api/productos/:id - un producto específico (todos los roles)
+router.get('/:id', verificarToken, verificarRol(['operario', 'supervisor', 'administrador']), async (req, res) => {
   try {
     const producto = await Producto.findById(req.params.id);
     if (!producto) {
@@ -43,10 +44,11 @@ router.get('/:id', verificarToken, verificarRol(['supervisor', 'administrador'])
   }
 });
 
-// POST /api/productos - crear producto (solo administrador)
+// POST /api/productos - crear producto (supervisor y administrador:
+// la jefatura de bodega debe poder dar de alta productos nuevos sin depender del administrador)
 router.post('/',
   verificarToken,
-  verificarRol(['administrador']),
+  verificarRol(['supervisor', 'administrador']),
   body('nombre').notEmpty().withMessage('El nombre es obligatorio'),
   body('stockMinimo').isInt({ min: 0 }).withMessage('El stock mínimo debe ser un número entero mayor o igual a 0'),
   body('unidad').notEmpty().withMessage('La unidad es obligatoria'),
@@ -73,10 +75,10 @@ router.post('/',
   }
 );
 
-// PUT /api/productos/:id - actualizar producto (solo administrador)
+// PUT /api/productos/:id - actualizar producto (supervisor y administrador)
 router.put('/:id',
   verificarToken,
-  verificarRol(['administrador']),
+  verificarRol(['supervisor', 'administrador']),
   body('stockMinimo').optional().isInt({ min: 0 }).withMessage('El stock mínimo debe ser un número entero mayor o igual a 0'),
   async (req, res) => {
     const errores = validationResult(req);

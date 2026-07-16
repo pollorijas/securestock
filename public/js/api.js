@@ -78,7 +78,7 @@ function pintarBarraNav(paginaActual) {
   const enlaces = [
     { href: 'dashboard.html', texto: 'Panel', roles: ['operario', 'supervisor', 'administrador'] },
     { href: 'movimientos.html', texto: 'Ingresos / Salidas', roles: ['operario', 'supervisor', 'administrador'] },
-    { href: 'productos.html', texto: 'Productos', roles: ['supervisor', 'administrador'] },
+    { href: 'productos.html', texto: 'Productos', roles: ['operario', 'supervisor', 'administrador'] },
     { href: 'proveedores.html', texto: 'Proveedores', roles: ['administrador'] },
     { href: 'usuarios.html', texto: 'Usuarios', roles: ['administrador'] }
   ];

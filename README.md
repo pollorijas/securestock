@@ -13,9 +13,9 @@ Sistema web para el control de inventario, análisis de movimientos y seguridad 
 
 ## Roles
 
-- **Operario**: registra ingresos/salidas y consulta su propio historial.
-- **Supervisor**: consulta inventario, historial completo y dashboard.
-- **Administrador**: además de lo anterior, gestiona productos, proveedores y cuentas de usuario.
+- **Operario**: registra ingresos/salidas, consulta el catálogo de productos con su stock y su propio historial.
+- **Supervisor**: además de lo anterior, ve el historial completo y el dashboard, exporta reportes, y crea/edita productos.
+- **Administrador**: acceso total; además gestiona proveedores y cuentas de usuario, y es el único que puede eliminar productos.
 
 ## Puesta en marcha
 
@@ -43,10 +43,10 @@ Sistema web para el control de inventario, análisis de movimientos y seguridad 
 | GET    | /api/auth/me                    | Verificar sesión / rol actual                  | Autenticado                     |
 | POST   | /api/auth/recuperar             | Solicitar enlace de recuperación de contraseña | Público                         |
 | POST   | /api/auth/resetear              | Cambiar contraseña con token de recuperación   | Público                         |
-| GET    | /api/productos                  | Listado de productos con stock                | Supervisor, Administrador       |
+| GET    | /api/productos                  | Listado de productos con stock                | Operario, Supervisor, Administrador |
 | GET    | /api/productos/basico           | Listado reducido (para formularios)            | Autenticado                     |
-| POST   | /api/productos                  | Crear producto                                 | Administrador                   |
-| PUT    | /api/productos/:id              | Actualizar producto                            | Administrador                   |
+| POST   | /api/productos                  | Crear producto                                 | Supervisor, Administrador       |
+| PUT    | /api/productos/:id              | Actualizar producto                            | Supervisor, Administrador       |
 | DELETE | /api/productos/:id              | Eliminar producto                              | Administrador                   |
 | GET    | /api/proveedores                | Listado de proveedores                         | Autenticado                     |
 | POST   | /api/proveedores                | Crear proveedor                                | Administrador                   |
@@ -55,7 +55,7 @@ Sistema web para el control de inventario, análisis de movimientos y seguridad 
 | POST   | /api/movimientos/ingreso        | Registrar ingreso de productos                 | Operario, Administrador         |
 | POST   | /api/movimientos/salida         | Registrar salida de productos                  | Operario, Administrador         |
 | GET    | /api/movimientos                | Historial con filtros (tipo, producto, fechas) | Operario (propio), Supervisor, Administrador |
-| GET    | /api/movimientos/inventario     | Stock actual de todos los productos            | Supervisor, Administrador       |
+| GET    | /api/movimientos/inventario     | Stock actual de todos los productos            | Operario, Supervisor, Administrador |
 | GET    | /api/movimientos/dashboard      | Indicadores para el panel principal            | Supervisor, Administrador       |
 | GET    | /api/movimientos/export         | Exporta el historial (CSV o JSON)              | Supervisor, Administrador       |
 | GET    | /api/logs                       | Consulta la auditoría del sistema              | Administrador                   |
