@@ -41,7 +41,8 @@ Para poblar la base de datos con un escenario completo de bodega, ejecutar en es
 1. `npm run seed` — crea el administrador inicial (usa ADMIN_EMAIL/ADMIN_PASSWORD del `.env`).
 2. `npm run seed:datos` — crea los 12 proveedores y un catálogo base de productos.
 3. `npm run seed:trabajadores` — crea 9 trabajadores (2 supervisores y 7 operarios), amplía el catálogo a más de 200 productos atribuidos a los supervisores (vía logs de auditoría) y reasigna los movimientos existentes a los operarios.
-4. `npm run seed:bigdata` — genera 25.000 movimientos (configurable con `MOVIMIENTOS_TOTALES`) realizados por los operarios, y mide los tiempos de consulta.
+4. `npm run seed:bigdata` — genera 25.000 movimientos (configurable con `MOVIMIENTOS_TOTALES`) realizados por los operarios, completa sus registros de auditoría (logs) y mide los tiempos de consulta.
+5. `npm run seed:logs` — (opcional) solo genera los logs de auditoría que falten para movimientos ya existentes, sin agregar movimientos nuevos. Útil si la base ya fue poblada con una versión anterior de los seeds.
 
 ## Endpoints principales
 

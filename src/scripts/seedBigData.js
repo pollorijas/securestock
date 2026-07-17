@@ -21,6 +21,7 @@ const Proveedor = require('../models/Proveedores');
 const Producto = require('../models/Productos');
 const Movimiento = require('../models/Movimientos');
 const MovimientoDet = require('../models/MovimientoDet');
+const { completarLogsFaltantes } = require('./completarLogs');
 
 const MOVIMIENTOS_TOTALES = Number(process.env.MOVIMIENTOS_TOTALES) || 25000;
 const DIAS_HISTORICO = Number(process.env.DIAS_HISTORICO) || 30;
@@ -177,6 +178,14 @@ async function main() {
     }));
   if (operaciones.length > 0) await Producto.bulkWrite(operaciones);
   console.log(`  Stock actualizado en ${operaciones.length} productos`);
+
+  // Auditoría (RNF05): como el seed escribe directo en la base de datos sin
+  // pasar por la API, los logs no se generan solos; se completan aquí para
+  // todos los movimientos que no tengan el suyo (incluidos los de seeds
+  // anteriores).
+  console.log('Completando registros de auditoría (logs)...');
+  const logsCreados = await completarLogsFaltantes();
+  console.log(`  Logs de auditoría agregados: ${logsCreados}`);
 
   const [totalMov, totalDet] = await Promise.all([
     Movimiento.countDocuments(),
