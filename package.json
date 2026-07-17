@@ -8,6 +8,7 @@
     "dev": "nodemon server.js",
     "seed": "node src/scripts/seedAdmin.js",
     "seed:datos": "node src/scripts/seedDatosFicticios.js",
+    "seed:trabajadores": "node src/scripts/seedTrabajadores.js",
     "seed:bigdata": "node src/scripts/seedBigData.js",
     "verificar": "node src/scripts/verificacionFuncional.js",
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -145,14 +145,20 @@ async function main() {
   await mongoose.connect(process.env.MONGO_URI);
   console.log('Conectado a MongoDB');
 
-  const [usuarios, proveedores, productos] = await Promise.all([
-    Usuario.find({ rol: { $in: ['operario', 'administrador'] } }),
+  // Los movimientos deben quedar a nombre de los operarios, que son quienes
+  // los realizan en la operación real. Si aún no existen operarios (no se ha
+  // ejecutado seed:trabajadores), se usa cualquier usuario disponible.
+  let usuarios = await Usuario.find({ rol: 'operario' });
+  if (usuarios.length === 0) {
+    usuarios = await Usuario.find({ rol: 'administrador' });
+  }
+  const [proveedores, productos] = await Promise.all([
     Proveedor.find(),
     Producto.find()
   ]);
 
   if (usuarios.length === 0 || proveedores.length === 0 || productos.length === 0) {
-    console.error('Faltan datos base. Ejecuta primero "npm run seed" (usuarios) y "npm run seed:datos" (productos y proveedores).');
+    console.error('Faltan datos base. Ejecuta primero "npm run seed" (usuarios), "npm run seed:datos" (proveedores) y "npm run seed:trabajadores" (operarios y catálogo).');
     await mongoose.disconnect();
     process.exit(1);
   }

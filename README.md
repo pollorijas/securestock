@@ -34,6 +34,15 @@ Sistema web para el control de inventario, análisis de movimientos y seguridad 
    ```
 5. Abrir `http://localhost:3000` en el navegador e iniciar sesión con el administrador creado.
 
+## Datos de prueba
+
+Para poblar la base de datos con un escenario completo de bodega, ejecutar en este orden:
+
+1. `npm run seed` — crea el administrador inicial (usa ADMIN_EMAIL/ADMIN_PASSWORD del `.env`).
+2. `npm run seed:datos` — crea los 12 proveedores y un catálogo base de productos.
+3. `npm run seed:trabajadores` — crea 9 trabajadores (2 supervisores y 7 operarios), amplía el catálogo a más de 200 productos atribuidos a los supervisores (vía logs de auditoría) y reasigna los movimientos existentes a los operarios.
+4. `npm run seed:bigdata` — genera 25.000 movimientos (configurable con `MOVIMIENTOS_TOTALES`) realizados por los operarios, y mide los tiempos de consulta.
+
 ## Endpoints principales
 
 | Método | Endpoint                       | Descripción                                  | Roles                          |
