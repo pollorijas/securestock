@@ -1,8 +1,3 @@
-// src/scripts/seedAdmin.js
-// Crea el primer usuario administrador. Se ejecuta una sola vez con:
-//   npm run seed
-// Como la ruta /api/auth/registro ahora solo puede usarla un administrador,
-// este script permite crear al primero directamente en la base de datos.
 require('dotenv').config();
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');

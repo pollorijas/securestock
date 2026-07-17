@@ -1,4 +1,3 @@
-// public/js/movimientos.js
 let productosDisponibles = [];
 
 document.addEventListener('DOMContentLoaded', async () => {

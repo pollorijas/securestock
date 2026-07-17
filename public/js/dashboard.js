@@ -1,4 +1,3 @@
-// public/js/dashboard.js
 document.addEventListener('DOMContentLoaded', async () => {
   const usuario = requerirSesion();
   if (!usuario) return;
@@ -34,7 +33,7 @@ function pintarKpis(datos) {
   document.getElementById('kpi-stock-critico').textContent = datos.stockCritico.length;
 }
 
-// Gráfico de barras simple hecho solo con CSS (altura proporcional al valor máximo)
+// Gráfico de barras simple
 function pintarBarras(contenedor, items, obtenerValor, obtenerEtiqueta) {
   contenedor.innerHTML = '';
   if (items.length === 0) {

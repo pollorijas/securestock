@@ -1,4 +1,3 @@
-// public/js/recuperar.js
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('form-recuperar');
   const mensaje = document.getElementById('mensaje');

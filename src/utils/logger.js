@@ -1,4 +1,3 @@
-// src/utils/logger.js
 const Log = require('../models/Logs');
 
 // Guarda un registro de auditoría. No lanza error si falla,

@@ -1,4 +1,3 @@
-// public/js/productos.js
 document.addEventListener('DOMContentLoaded', async () => {
   const usuario = requerirSesion(['supervisor', 'administrador']);
   if (!usuario) return;

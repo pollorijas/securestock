@@ -1,4 +1,3 @@
-// src/middleware/auth.js
 const jwt = require('jsonwebtoken');
 
 // Verifica que la petición traiga un token JWT válido en el header Authorization
@@ -21,7 +20,6 @@ function verificarToken(req, res, next) {
 }
 
 // Devuelve un middleware que solo deja pasar a los roles indicados
-// Uso: verificarRol(['administrador', 'supervisor'])
 function verificarRol(rolesPermitidos) {
   return (req, res, next) => {
     if (!req.usuario || !rolesPermitidos.includes(req.usuario.rol)) {

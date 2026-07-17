@@ -1,4 +1,3 @@
-// public/js/login.js
 document.addEventListener('DOMContentLoaded', () => {
   // Si ya hay una sesión activa, se envía directo al panel
   if (obtenerToken() && obtenerUsuario()) {

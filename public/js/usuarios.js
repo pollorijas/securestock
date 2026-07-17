@@ -1,4 +1,3 @@
-// public/js/usuarios.js
 document.addEventListener('DOMContentLoaded', () => {
   const usuario = requerirSesion(['administrador']);
   if (!usuario) return;

@@ -1,4 +1,3 @@
-// public/js/resetear.js
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('form-resetear');
   const mensaje = document.getElementById('mensaje');

@@ -1,7 +1,3 @@
-// public/js/api.js
-// Funciones compartidas por todas las páginas para hablar con la API
-// y manejar la sesión (token JWT) guardada en localStorage.
-
 const API_BASE = '/api';
 
 function obtenerToken() {

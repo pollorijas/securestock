@@ -1,9 +1,6 @@
-// src/utils/mailer.js
 const nodemailer = require('nodemailer');
 
 // Si hay credenciales SMTP configuradas en .env se envía el correo real.
-// Si no (por ejemplo en desarrollo local), el enlace se muestra en consola
-// para poder probar el flujo de recuperación sin necesitar un correo real.
 function crearTransportador() {
   if (!process.env.EMAIL_HOST || !process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
     return null;

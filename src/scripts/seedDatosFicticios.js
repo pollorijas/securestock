@@ -1,15 +1,3 @@
-// src/scripts/seedDatosFicticios.js
-// Genera datos ficticios de prueba directamente en MongoDB: proveedores,
-// productos, y sus ingresos/salidas de inventario. Los usuarios NO se crean
-// aquí (deben existir al menos uno antes de ejecutar este script, por
-// ejemplo con "npm run seed" o registrándolos desde la aplicación).
-//
-// Uso:
-//   node src/scripts/seedDatosFicticios.js
-//
-// Es seguro volver a ejecutarlo: los proveedores y productos se crean solo
-// si no existen (por nombre); los movimientos (ingresos/salidas) sí se
-// agregan de nuevo cada vez que se ejecuta.
 require('dotenv').config();
 const mongoose = require('mongoose');
 const Usuario = require('../models/Usuario');
