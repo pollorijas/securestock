@@ -48,6 +48,30 @@ Este guion recorre los tres perfiles y las reglas de negocio clave del sistema.
 - Mostrar en MongoDB Atlas la colección `logs` con la auditoría de todo lo que se
   acaba de hacer en la demo (quién, qué y cuándo — RNF05).
 
+## Plan de respaldo si Render falla el día del examen
+
+El examen es una demostración compartiendo pantalla por Teams, por lo que el
+respaldo más confiable es ejecutar la aplicación en tu propio computador:
+la base de datos es la misma (MongoDB Atlas), así que los datos y el
+comportamiento son idénticos a los de Render.
+
+1. **Plan A — Render** (normal): abrir la URL pública unos minutos antes para
+   que el servidor despierte.
+2. **Plan B — ejecución local** (si Render no responde):
+   ```
+   npm run dev
+   ```
+   y abrir http://localhost:3000. Verificar con `npm run verificar`.
+   Ensayar este plan al menos una vez antes del examen para confirmar que
+   el proyecto corre en tu máquina con el `.env` correcto.
+3. **Plan C — segundo hosting** (opcional): tener el proyecto también
+   desplegado en otro servicio gratuito (por ejemplo Koyeb, que no pide
+   tarjeta). Solo vale la pena si quieres redundancia total; el Plan B ya
+   cubre el riesgo real.
+
+Riesgo restante: si fallara tu conexión a Internet no habría acceso a Atlas;
+para ese caso extremo, ten capturas de todas las vistas como último recurso.
+
 ## Consejos
 
 - Ensayar la demo completa con cronómetro al menos dos veces.
